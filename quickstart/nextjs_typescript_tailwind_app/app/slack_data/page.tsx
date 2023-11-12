@@ -1,4 +1,6 @@
-const slack_data =     {
+require('dotenv').config()
+
+const slack_data = {
   "type": "message",
   "text": "Hello world!",
   "user": "",
@@ -23,6 +25,26 @@ const slack_data =     {
 };
 
 export default function Profile() {
+  const { WebClient } = require('@slack/web-api');
+  // Read a token from the environment variables
+  const token = process.env.SLACK_TOKEN;
+  console.log(token);
+  // Initialize
+  const web = new WebClient(token);
+  const conversationId = '...';
+
+  (async () => {
+
+    // Post a message to the channel, and await the result.
+    // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
+    const result = await web.chat.postMessage({
+      text: 'Hello world!',
+      channel: conversationId,
+    });
+
+    // The result contains an identifier for the message, `ts`.
+    console.log(`Successfully send message ${result.ts} in conversation ${conversationId}`);
+  })();
   if(slack_data.type == 'message'){
     var dateRevert = new Date(parseInt(slack_data.ts)*1000);
     return (
