@@ -31,14 +31,14 @@ export default function Profile() {
   console.log(token);
   // Initialize
   const web = new WebClient(token);
-  const conversationId = '...';
+  const conversationId = 'C037XHRQM5Z';
 
   (async () => {
 
     // Post a message to the channel, and await the result.
     // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
     const result = await web.chat.postMessage({
-      text: 'Hello world!',
+      text: 'こんにちは。今日も元気に気をつけてね。',
       channel: conversationId,
     });
 
